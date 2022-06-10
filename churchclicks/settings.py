@@ -100,6 +100,8 @@ WSGI_APPLICATION = 'churchclicks.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+X_FRAME_OPTIONS = '*'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
