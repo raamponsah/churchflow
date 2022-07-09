@@ -1,7 +1,7 @@
 from django.http import HttpResponseBadRequest, HttpResponse
 from django.shortcuts import redirect, get_object_or_404
 
-from churchsettings.models import ChurchSetup
+from church.models import Church
 
 
 def only_manager(view_func):
@@ -38,9 +38,9 @@ def login_not_required(view_func):
 def check_if_setup(request_view):
     def wrapper_func(request, *args, **kwargs):
         try:
-            setup = ChurchSetup.objects.filter(user=request.user).get()
+            setup = Church.objects.filter(user=request.user).get()
             return request_view(request, *args, **kwargs)
-        except ChurchSetup.DoesNotExist:
+        except Church.DoesNotExist:
             return redirect('setup-church', user=request.user.id)
 
     return wrapper_func

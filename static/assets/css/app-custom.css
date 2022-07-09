@@ -26,7 +26,38 @@ ul.errorlist{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover !important;
+}
 
+a.paginate_button.previous {
+    padding: 10px;
+    background: lightgreen;
+    border: 1px solid green;
+    color:green;
+    border-radius: 5px;
+    margin: 10px;
+}
 
-
+a.paginate_button.previous.disabled {
+    padding: 10px;
+    background: #c7c7c7;
+    border: 1px solid #c7c7c7;
+    color:black;
+    border-radius: 5px;
+    margin: 10px;
+}
+a.paginate_button.next {
+    padding: 10px;
+    background: #15a362 !important;
+    border: 1px solid #15a362;
+    color:white;
+    border-radius: 5px;
+    margin: 10px;
+}
+a.paginate_button.next.disabled {
+    padding: 10px;
+    background: #c7c7c7 !important;
+    border: 1px solid #c7c7c7;
+    color:black;
+    border-radius: 5px;
+    margin: 10px;
 }

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import add_member, add_religious_info, edit_member, delete_member, members, member
+from .views import add_member, add_religious_info, edit_member, delete_member, members, member, update_religious_info
 
 urlpatterns = [
     path('members/', members, name="members"),
@@ -9,6 +9,7 @@ urlpatterns = [
     path('delete-member/<int:pk>', delete_member, name="delete-member"),
 
     path('members/<int:pk>/add-religious-info/', add_religious_info, name="add-religious-info"),
+    path('members/<int:pk>/update-religious-info/', update_religious_info, name="update-religious-info"),
     path('levies/', include('levy.urls')),
     path('welfare/', include('welfare.urls')),
     path('donations/', include('donations.urls')),

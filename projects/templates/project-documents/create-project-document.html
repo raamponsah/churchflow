@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
- <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML">
+ <div class="row app-card shadow-sm p-4">
          <form method="post" enctype="multipart/form-data">
                       <h5>Add Document to: {{ project }} Project</h5>
                       {% csrf_token %}
@@ -16,7 +16,7 @@
 
               <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                 <div class="col-auto">
-                    <input type="submit" hx-push-url="true" hx-post="." value="Add Document" class="btn app-btn-primary">
+                    <input type="submit" value="Add Document" class="btn app-btn-primary">
                 </div>
             </div>
          </form>

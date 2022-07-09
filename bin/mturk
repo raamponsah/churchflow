@@ -19,13 +19,18 @@
 # WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 
-import argparse # Hence, Python 2.7 is required.
-import sys
+import argparse  # Hence, Python 2.7 is required.
+import calendar
+import datetime
+import inspect
 import os.path
 import string
-import inspect
-import datetime, calendar
-import boto.mturk.connection, boto.mturk.price, boto.mturk.question, boto.mturk.qualification
+import sys
+
+import boto.mturk.connection
+import boto.mturk.price
+import boto.mturk.qualification
+import boto.mturk.question
 from boto.compat import json
 
 # --------------------------------------------------

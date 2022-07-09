@@ -56,7 +56,9 @@ def edit_service(request, service_pk):
 
 def delete_service(request, service_pk):
     service = ChurchService.objects.filter(id=service_pk).get()
+    print(service)
     if request.method == 'POST':
+        print(service, "hunk")
         service.delete()
         messages.success(request, f"Record deleted successfully")
         return redirect('church_services')

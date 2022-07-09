@@ -197,7 +197,6 @@ if __name__ == "__main__":
     import sys
     import time
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
     from boto.ec2.autoscale import AutoScalingGroup
     from boto.ec2.autoscale import LaunchConfiguration
     parser = OptionParser(version=VERSION, usage=usage)

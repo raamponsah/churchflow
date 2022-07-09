@@ -10,7 +10,7 @@
                 </div><!--//col-->
                 <div class="col-auto row justify-content-md-end ">
                     <div class="col-auto">
-                    <a class="btn app-btn-secondary" hx-get="{% url 'create-offering' %}" hx-push-url="true" hx-target="#app-body" hx-swap="outerHTML">
+                    <a class="btn app-btn-secondary" href="{% url 'create-offering' %}" >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
@@ -62,7 +62,7 @@
                         <td class=" ">
 
                                <span>
-                      <a href="#" hx-get="{% url 'edit-offering' offering.id %}" hx-swap="outerHTML" hx-push-url="true" hx-target="#app-body">
+                      <a href="#" hx-get="{% url 'edit-offering' offering.id %}" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                height="16" fill="currentColor"
                                class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -84,7 +84,7 @@
 
                         </td>
 
-                        <div id="deleteModal-{{ offering.id }}" class="modal fade" hx-target="#app-body" hx-swap="outerHTML">
+                        <div id="deleteModal-{{ offering.id }}" class="modal fade">
                             <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content bd-0 tx-14">
                                     <div class="modal-header pd-x-20">
@@ -97,10 +97,10 @@
                                             <small>{{ deleteObject }}</small>
                                         </p>
                                     </div>
-                                    <form method="POST">
+                                    <form method="POST" action="{% url 'delete-offering' offering.id %}" >
                                         {% csrf_token %}
                                         <div class="modal-footer justify-content-center">
-                                            <button type="submit" hx-post="{% url 'delete-offering' offering.id %}" hx-push-url="true"
+                                            <button type="submit"
                                                     class="btn app-btn-primary">
                                                 Delete
                                             </button>

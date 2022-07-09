@@ -238,7 +238,7 @@ if __name__ == "__main__":
     import boto
     import sys
     from optparse import OptionParser
-    from boto.mashups.iobject import IObject
+
     parser = OptionParser(version=VERSION, usage=usage)
     parser.add_option("-z", "--zone",
                       help="Operate on zone",

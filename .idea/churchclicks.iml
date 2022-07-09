@@ -18,11 +18,14 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/static/htmx" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (churchclicks)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (jediknights)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="animate.css" level="application" />
     <orderEntry type="library" name="summernote" level="application" />
     <orderEntry type="library" name="jquery-3.5.1" level="application" />
+    <orderEntry type="library" name="dataTables.bootstrap5" level="application" />
+    <orderEntry type="library" name="toastify-js" level="application" />
+    <orderEntry type="library" name="select2" level="application" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />

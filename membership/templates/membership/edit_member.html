@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML" >
+  <div class="row app-card shadow-sm p-4">
 
        <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -18,13 +18,13 @@
                     <div class="row">
 
                         {% for field in membership_form %}
-                         <div class="col-sm-3 mb-4">
+                         <div class="col-sm-4 mb-4">
                             {{ field.label }}
                             {{ field }}
                          {% if field.errors %}
-                             <div>
+                             <small>
                                   {{field.errors}}
-                             </div>
+                             </small>
                          {% endif %}
 
                         </div>

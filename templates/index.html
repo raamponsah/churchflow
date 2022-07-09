@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,13 +17,14 @@
     <!-- FontAwesome JS-->
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href=" {% static 'assets/css/portal.css' %} ">
-    <link id="theme-style" rel="stylesheet" href=" {% static 'assets/css/app-custom.css' %} ">
-{#<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">#}
+    <link id="theme-style-1" rel="stylesheet" href=" {% static 'assets/css/portal.css' %} ">
+    <link id="theme-style-2" rel="stylesheet" href=" {% static 'assets/css/app-custom.css' %} ">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <!-- include summernote css/js-->
 {#    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">#}
-    <script src="{% static 'htmx/htmx.min.js' %}"></script>
+{#    <script src="{% static 'htmx/htmx.min.js' %}"></script>#}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <script>
             document.addEventListener('DOMContentLoaded', function () {
@@ -42,6 +44,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
+    <link id="theme-style-3" rel="stylesheet" href=" {% static 'assets/css/avatar.css' %} ">
 
     <style>
         .logo-text {
@@ -82,9 +85,6 @@
 		            </div><!--//app-search-box-->
 
 		            <div class="app-utilities col-auto">
-
-
-
 			            <div class="app-utility-item">
 				            <a href="{% url 'church-settings' request.user.id %}"   title="Settings">
 					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
@@ -96,9 +96,9 @@
 					    </div><!--//app-utility-item-->
 			            <div class="app-utility-item app-user-dropdown dropdown">
 				            <a class="dropdown-toggle"  id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"  role="button" aria-expanded="false">
-                                <img src="{% static 'assets/images/user.png' %}" alt="user profile"></a>
+                                <img src="{{ request.user.user_account.get_profile_photo_url }}" class="avatar" alt="user profile"></a>
 				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="#">Account</a></li>
+								<li><a class="dropdown-item" href="{% url 'user_account' %}">Account</a></li>
 								<li><a class="dropdown-item" href="#">Settings</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
@@ -129,14 +129,11 @@
     {% endfor %}
             {% endif %}
 
-
-
-        {#        Main Content#}
         <h1 class="app-page-title">{{ page_title }}</h1>
         {% block content %}
 
         {% endblock %}
-        {#           {% end main content %}#}
+
 
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
@@ -151,6 +148,7 @@
 
     </div><!--//app-wrapper-->
 
+{#<script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous"></script>#}
 
     <!-- Javascript -->
       <script defer src="{% static 'assets/plugins/fontawesome/js/all.min.js' %}"></script>
@@ -199,7 +197,18 @@
 
 </script>
 
+   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+      <script>
+          // In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+
+    $('.js-example-basic-single').select2();
+    $('.js-example-basic-multiple').select2();
+
+});
+      </script>
 
 </body>
 </html>

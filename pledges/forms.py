@@ -6,8 +6,8 @@ from pledges.models import MonetaryPledge, ItemPledge, MemberItemPledge, MemberM
 class MonetaryPledgeForm(forms.ModelForm):
     class Meta:
         model = MonetaryPledge
-        fields = ['pledge_person', 'amount_pledged','email',
-                  'amount_paid', 'phone_number', 'description']
+        fields = ['pledge_person', 'amount_pledged','phone_number','email',
+                  'amount_paid',  'description']
 
         widgets = {
             'pledge_person': forms.TextInput(attrs={'class': 'form-control'}),

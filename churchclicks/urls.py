@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 
+from accounts.views import password_reset_request
 from churchclicks import settings
 from django.conf.urls.static import static
 
@@ -15,9 +16,10 @@ urlpatterns = [
                   path('projects/', include('projects.urls')),
                   path('accounts/', include('accounts.urls')),
                   path('expenses/', include('expenses.urls')),
-                  path('church/', include('churchsettings.urls')),
+                  path('church/', include('church.urls')),
                   path('cashbook/', include('cashbook.urls')),
                   path('admin/', admin.site.urls),
+                  path("password_reset", password_reset_request, name="password_reset")
               ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
 
 if settings.DEBUG:

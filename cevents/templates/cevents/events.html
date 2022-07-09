@@ -10,6 +10,7 @@
                 <thead>
                 <tr>
                     <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Title</th>
+                    <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Venue</th>
                     <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Type</th>
                     <th class="tx-10-force tx-mont tx-medium hidden-xs-down">Start</th>
                     <th class="tx-10-force tx-mont tx-medium hidden-xs-down">End</th>
@@ -20,6 +21,7 @@
                 {% for event in cevents %}
                     <tr>
                         <td class="valign-middle hidden-xs-down">{{ event.title }}</td>
+                        <td class="valign-middle hidden-xs-down">{{ event.venue }}</td>
                         <td class="valign-middle hidden-xs-down">{{ event.type | title }}</td>
                         <td class="valign-middle hidden-xs-down">{{ event.start_date }}</td>
                         <td class="valign-middle hidden-xs-down">{{ event.end_date }}</td>

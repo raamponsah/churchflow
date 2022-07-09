@@ -3,7 +3,7 @@
 {% block content %}
  <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML">
          <form method="post" enctype="multipart/form-data">
-                      <h5>Add New</h5>
+                      <h5>Edit Pledge - {{ member }}</h5>
                       {%csrf_token%}
                       {% for field in form.hidden_fields %}
                           {{ field }}

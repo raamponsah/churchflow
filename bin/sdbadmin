@@ -23,10 +23,12 @@
 # Tools to dump and recover an SDB domain
 #
 VERSION = "%prog version 1.0"
-import boto
 import time
+
+import boto
 from boto import sdb
 from boto.compat import json
+
 
 def choice_input(options, default=None, title=None):
     """

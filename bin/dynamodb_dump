@@ -8,7 +8,6 @@ import boto
 from boto.compat import json
 from boto.compat import six
 
-
 DESCRIPTION = """Dump the contents of one or more DynamoDB tables to the local filesystem.
 
 Each table is dumped into two files:

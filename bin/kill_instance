@@ -1,11 +1,10 @@
 #!/Users/raphaelamponsah/Developer/pydev/churchclicks/bin/python
 
 import sys
-from optparse import OptionParser
 
 import boto
 from boto.ec2 import regions
-
+from optparse import OptionParser
 
 
 def kill_instance(region, ids):

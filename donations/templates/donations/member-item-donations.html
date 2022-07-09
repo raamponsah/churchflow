@@ -10,7 +10,7 @@
                 </div><!--//col-->
                 <div class="col-auto row justify-content-md-end ">
                     <div class="col-auto">
-                    <a class="btn app-btn-secondary" hx-get="{% url 'create-member-item-donation' member.id  %}" hx-push-url="true" hx-target="#app-body" hx-swap="outerHTML">
+                    <a class="btn app-btn-secondary" href="{% url 'create-member-item-donation' member.id  %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"></path>
@@ -64,7 +64,7 @@
                         <td class=" ">
 
                                <span>
-                      <a href="#" hx-get="{% url 'edit-member-item-donation' member.id donation.id %}" hx-swap="outerHTML" hx-push-url="true" hx-target="#app-body">
+                      <a href="{% url 'edit-member-item-donation' member.id donation.id %}">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                height="16" fill="currentColor"
                                class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -73,7 +73,7 @@
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
                         </svg></a>
 {##}
-                                <a href="#" hx-get="{% url 'delete-member-item-donation' member.id donation.id %}" data-bs-toggle="modal"
+                                <a href="{% url 'delete-member-item-donation' member.id donation.id %}" data-bs-toggle="modal"
                                    data-bs-target="#deleteModal-{{ donation.id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                          class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -86,7 +86,7 @@
 
                         </td>
 
-                        <div id="deleteModal-{{ donation.id }}" class="modal fade" hx-target="#app-body" hx-swap="outerHTML">
+                        <div id="deleteModal-{{ donation.id }}" class="modal fade">
                             <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content bd-0 tx-14">
                                     <div class="modal-header pd-x-20">
@@ -99,11 +99,10 @@
                                             <small>{{ deleteObject }}</small>
                                         </p>
                                     </div>
-                                    <form method="POST">
+                                    <form method="POST" action="{% url 'delete-member-item-donation' member.id donation.id %}">
                                         {% csrf_token %}
                                         <div class="modal-footer justify-content-center">
-                                            <button type="submit" hx-post="{% url 'delete-member-item-donation' member.id donation.id %}" hx-push-url="true"
-                                                    class="btn app-btn-primary">
+                                            <button type="submit" class="btn app-btn-primary">
                                                 Delete
                                             </button>
                                            <button type="button"  class="btn  app-btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>

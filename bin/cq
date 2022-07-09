@@ -20,10 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
-import getopt, sys
+import getopt
+import sys
+
 import boto.sqs
-from boto.sqs.connection import SQSConnection
 from boto.exception import SQSError
+from boto.sqs.connection import SQSConnection
+
 
 def usage():
     print 'cq [-c] [-q queue_name] [-o output_file] [-t timeout] [-r region]'
@@ -89,4 +92,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-        

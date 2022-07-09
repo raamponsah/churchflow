@@ -116,6 +116,7 @@ def edit_offering_type(request, offering_type_pk):
 
 
 def delete_offering_type(request, offering_type_pk):
+    print("deleting...")
     offering_type = OfferingType.objects.filter(id=offering_type_pk).get()
     if request.method == 'POST':
         offering_type.delete()

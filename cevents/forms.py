@@ -18,9 +18,10 @@ class ChurchEventForm(forms.ModelForm):
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control','id':'summernote', 'rows': 5}),
-            'start_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
-            'end_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}),
+            'description': forms.Textarea(attrs={'class': 'form-control','id':'summernote', 'rows': 5, 'required':True}),
+            'start_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+            'end_date': forms.DateTimeInput(attrs={'class': 'form-control', 'type': 'datetime-local'}, format='%Y-%m-%dT%H:%M'),
+            'venue': forms.TextInput(attrs={'class': 'form-control'}),
             'type': forms.RadioSelect(attrs={'class': ''}),
-            'email_recipients': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'notify_members': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }

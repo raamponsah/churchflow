@@ -1,13 +1,14 @@
-from cProfile import label
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+
+from accounts.models import UserAccount
 
 User = get_user_model()
 
 
 class RegisterUserForm(UserCreationForm):
-    password1 = forms.CharField(max_length=50,label='Password',
+    password1 = forms.CharField(max_length=50, label='Password',
                                 required=True,
                                 widget=forms.PasswordInput(attrs={'placeholder': 'Password',
                                                                   'class': 'form-control',
@@ -32,6 +33,18 @@ class RegisterUserForm(UserCreationForm):
             'email': forms.TextInput(
                 attrs={'class': 'form-control signup-email', 'type': 'email', 'placeholder': 'Email'}),
             'username': forms.TextInput(
-                attrs={'class': 'form-control signup-email','placeholder': 'Username'}),
+                attrs={'class': 'form-control signup-email', 'placeholder': 'Username'}),
             # 'role': forms.Select(attrs={'class': 'form-control signup-email', 'label': 'Role'}),
+        }
+
+
+class UserAccountForm(forms.ModelForm):
+    class Meta:
+        model = UserAccount
+        fields = ['about', 'role','profile_photo']
+
+        widgets = {
+            'role': forms.TextInput(attrs={'class': 'form-control', 'readonly': True}),
+            'about': forms.Textarea(attrs={'class': 'form-control'}),
+            'profile_photo':forms.FileInput(),
         }

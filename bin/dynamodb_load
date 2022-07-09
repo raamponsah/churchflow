@@ -8,7 +8,6 @@ from boto.compat import json
 from boto.compat import six
 from boto.dynamodb.schema import Schema
 
-
 DESCRIPTION = """Load data into one or more DynamoDB tables.
 
 For each table, data is read from two files:

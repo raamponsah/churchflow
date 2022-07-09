@@ -8,7 +8,6 @@
 A front end to the Docutils Publisher, producing OpenOffice documents.
 """
 
-import sys
 try:
     import locale
     locale.setlocale(locale.LC_ALL, '')
@@ -27,4 +26,3 @@ writer = Writer()
 reader = Reader()
 output = publish_cmdline_to_binary(reader=reader, writer=writer,
     description=description)
-

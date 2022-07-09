@@ -1,4 +1,4 @@
-<div id="deleteModal-{{ deleteObject.id }}" class="modal fade" hx-target="#app-body" hx-swap="outerHTML">
+<div id="deleteModal-{{ deleteObject.id }}" class="modal fade" >
                             <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content bd-0 tx-14">
                                     <div class="modal-header pd-x-20">
@@ -11,10 +11,10 @@
                                             <small>{{ deleteObject }}</small>
                                         </p>
                                     </div>
-                                    <form method="POST">
+                                    <form method="POST" action="{% url deleteRoute deleteObject.id %}">
                                         {% csrf_token %}
                                         <div class="modal-footer justify-content-center">
-                                            <button type="submit" hx-post="{% url deleteRoute deleteObject.id %}" hx-push-url="true"
+                                            <button type="submit"
                                                     class="btn app-btn-primary">
                                                 Delete
                                             </button>

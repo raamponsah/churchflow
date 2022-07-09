@@ -21,10 +21,10 @@
 # IN THE SOFTWARE.
 #
 import getopt
-import sys
 import os
-import boto
+import sys
 
+import boto
 from boto.compat import six
 
 try:

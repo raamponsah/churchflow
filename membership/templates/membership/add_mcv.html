@@ -3,13 +3,15 @@
 {% load static %}
 {% block content %}
 
-  <div class="row mg-r-10 form-layout form-layout-1 br-section-wrapper">
+   <div class="row app-card shadow-sm p-4">
+       <div class="app-card-header p-3 mb-4">
       <div class="row">
-          <h5 class="tx-xs-xthin tx-primary pd-l-15">Add {{member}} Religious Info</h5>
+          <h5 class="tx-xs-xthin tx-primary pd-l-15">Add Christian Info</h5>
 
       </div>
+   </div>
        <form method="post" data-parsley-validate>
-           <a href="{% url 'members'%}" class="float-lg-right btn btn-outline-primary rounded-50">Skip</a>
+           <a href="{% url 'members'%}" class="float-lg-right btn app-btn-secondary rounded-50">Skip</a>
                     {% csrf_token %}
               {% if mcv_errors %}
                    {% for field in form %}
@@ -26,7 +28,7 @@
                         {% endfor %}
 
                         {% for field in mcv_form.visible_fields %}
-                         <div class="col-sm-3">
+                         <div class="col-sm-3 mb-4">
                              {{ field.label }}
                             {{ field }}
                          {% if field.errors %}
@@ -37,9 +39,9 @@
 
                         </div>
                         {% endfor %}
-                          <div class="mg-t-20 col-sm-6 col-md-3">
+                         <div class="col-auto mt-5">
 
-                            <button type="submit" class="btn btn-outline-primary btn-block cursor">Add Info</button>
+                            <button type="submit" class="btn app-btn-primary btn-block cursor">Add + </button>
 
             </div>
                     </div>

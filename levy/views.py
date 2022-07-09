@@ -1,18 +1,17 @@
-from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from levy.forms import LevyForm
 from levy.models import Levy
 from membership.models import Member
-from django.urls import reverse
 
 
 def levies(request, member_pk):
     member = Member.objects.filter(id=member_pk).get()
     member_levies = Levy.objects.filter(member=member)
 
-    context = {'levies': member_levies, 'member': member,'table_name': 'Member Levy Data',
+    context = {'levies': member_levies, 'member': member, 'table_name': 'Member Levy Data',
                'dbtn': 'member-levy-download'}
     return render(request, 'levy/levies.html', context)
 

@@ -2,11 +2,10 @@
 
 import sys
 from operator import attrgetter
-from optparse import OptionParser
 
 import boto
 from boto.ec2 import regions
-
+from optparse import OptionParser
 
 HEADERS = {
     'ID': {'get': attrgetter('id'), 'length':15},

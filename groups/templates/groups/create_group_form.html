@@ -1,9 +1,9 @@
 {% extends 'index.html' %}
 
 {% block content %}
- <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML">
-         <form method="post" class="" enctype="multipart/form-data" >
-                      <h5>Add New</h5>
+ <div class="row app-card shadow-sm p-4">
+         <form method="post" action="{% url 'create-group' %}" enctype="multipart/form-data" >
+                      <h5>Add New Group</h5>
                       {%csrf_token%}
                       {% for field in form.hidden_fields %}
                           {{ field }}
@@ -22,7 +22,7 @@
 
                       <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                 <div class="col-auto">
-                    <button type="submit" hx-push-url="true" hx-post="{% url 'create-group' %}" class="btn app-btn-primary mt-3">Create New</button>
+                    <button type="submit"  class="btn app-btn-primary mt-3">Create New</button>
                 </div>
             </div>
                   </form>

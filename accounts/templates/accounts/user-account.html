@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+{#        {% load crispy_forms_tags %}#}
+			    <h1 class="app-page-title">Account</h1>
+			    <hr class="mb-4">
+                
+
+     <div class="row g-4 settings-section">
+	                <div class="app-card app-card-settings shadow-sm p-4 row">
+        <h5 class="fw-light">Personal</h5>
+                        <div class="col-4">
+                            <img src="{{ request.user.user_account.get_profile_photo_url }}" alt="">
+		                <h3 class="section-title">{{ request.user.fullname }}</h3>
+		                <div class="section-intro">
+                            {{ request.user.email }}
+                        </div>
+	                </div>
+		                <div class="col-8">
+
+						    <div class="app-card-body">
+						 <form class="settings-form" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                 {% for field in form.hidden_fields %}
+                                      {{ field }}
+                                  {% endfor %}
+								    {{ form.as_p }}
+									<button type="submit"  class="btn app-btn-primary">Save Changes</button>
+							    </form>
+						    </div><!--//app-card-body-->
+
+						</div><!--//app-card-->
+	                </div>
+                </div><!--//row-->
+                <hr class="my-4">
+
+
+
+
+
+{% endblock %}

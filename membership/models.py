@@ -2,25 +2,27 @@ import datetime
 
 from PIL import Image
 from django.db import models
+from django_countries.fields import CountryField
 
 from groups.models import Group
 
 # Create your models here.
 
 # from welfare.models import WelfareContribution
+from membership.ChoiceDataSets.ChoiceSets import OCCUPATIONS, COUNTRIES
 
 GENERIC_BOOLEAN = (
-    (0, 'No'),
-    (1, 'Yes'),
+    (False, 'No'),
+    (True, 'Yes'),
 )
 
 
 class Member(models.Model):
-    OCCUPATIONS = (
-        ('teacher', 'Teacher'),
-        ('lecturer', 'Lecturer'),
-        ('nurse', 'Nurse'),
-        ('doctor', 'Doctor'),
+    EMPLOYMENT_STATUS_CHOICES = (
+        ('not-applicable', 'Not Applicable'),
+        ('unemployed', 'Unemployed'),
+        ('self-employed', 'Self-Employed'),
+        ('employed', 'Employed'),
     )
 
     SECTORS = (
@@ -73,45 +75,50 @@ class Member(models.Model):
         ('religious', 'religious'),
     )
 
+    muid = models.CharField(max_length=12, blank=False, null=False, editable=False, unique=True)
     first_name = models.CharField(max_length=255, blank=False, null=False)
     middle_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=False, null=False)
     gender = models.CharField(max_length=255, null=False, blank=False, default=None, choices=GENDER_TYPE)
-    email = models.EmailField(max_length=255, blank=True, null=True, db_index=True, unique=True)
-    date_of_birth = models.DateField(blank=False, null=False)
+    email = models.EmailField(max_length=255, blank=True, null=True, db_index=True, unique=True, default=None)
+    date_of_birth = models.DateField(blank=False, null=False, default=None)
     primary_phone = models.CharField(max_length=255, blank=False, null=False)
-    secondary_phone = models.CharField(max_length=255, blank=True, null=True)
+    secondary_phone = models.CharField(max_length=255, blank=True, null=True, default=None)
+    country = models.CharField(max_length=255, blank=False, null=False, default=None, choices=COUNTRIES)
     residential_address = models.CharField(max_length=255, blank=True, null=True)
     city_or_town = models.CharField(max_length=255, blank=True)
-    region = models.CharField(max_length=255, blank=False, null=False)
-    occupation = models.CharField(max_length=255, blank=False, null=False, choices=OCCUPATIONS)
-    sector = models.CharField(max_length=255, blank=False, null=False, choices=SECTORS)
-    education_level = models.CharField(max_length=255, blank=False, null=False, choices=EDUCATION_LEVEL)
+    region = models.CharField(max_length=255, blank=False, null=False, default=None)
+    occupation = models.CharField(max_length=255, blank=False, null=False, choices=OCCUPATIONS, default=None)
+    employment_status = models.CharField(max_length=255,default=None, blank=True, null=True, choices=EMPLOYMENT_STATUS_CHOICES)
+    company_employed = models.CharField(max_length=255, blank=True, null=True, default=None)
+    sector = models.CharField(max_length=255, blank=False, null=False, choices=SECTORS, default=None)
+    education_level = models.CharField(max_length=255, blank=False, null=False, choices=EDUCATION_LEVEL, default=None)
     marital_status = models.CharField(max_length=20, blank=False, null=False,
                                       choices=MARITAL_STATUS_CHOICES, default=MARITAL_STATUS_CHOICES[0])
 
     # family data 
-    father_name = models.CharField(max_length=255, blank=False, null=False)
-    father_hometown = models.CharField(max_length=255, blank=False, null=False)
+    father_name = models.CharField(max_length=255, blank=False, null=False, default=None)
+    father_hometown = models.CharField(max_length=255, blank=False, null=False, default=None)
     father_living_status = models.CharField(max_length=255, null=False, blank=False, default=None,
                                             choices=LIVING_STATUS)
-    mother_name = models.CharField(max_length=255, blank=False, null=False)
-    mother_hometown = models.CharField(max_length=255, blank=False, null=False)
+    mother_name = models.CharField(max_length=255, blank=False, null=False, default=None)
+    mother_hometown = models.CharField(max_length=255, blank=False, null=False, default=None)
     mother_living_status = models.CharField(max_length=255, null=False, blank=False, default=None,
                                             choices=LIVING_STATUS)
     # next of kin
-    next_of_kin_name = models.CharField(max_length=255, blank=False, null=False)
-    next_of_kin_relationship = models.CharField(max_length=255, blank=False, null=False, choices=RELATIONSHIP)
-    next_of_kin_primary_phone = models.CharField(max_length=255, blank=False, null=False)
-    next_of_kin_email = models.EmailField(max_length=255, blank=True, null=True)
-    next_of_kin_location = models.CharField(max_length=255, blank=True, null=False, )
+    next_of_kin_name = models.CharField(max_length=255, blank=False, null=False, default=None)
+    next_of_kin_relationship = models.CharField(max_length=255, blank=False, null=False, choices=RELATIONSHIP,
+                                                default=None)
+    next_of_kin_primary_phone = models.CharField(max_length=255, blank=False, null=False, default=None)
+    next_of_kin_email = models.EmailField(max_length=255, blank=True, null=True, default=None)
+    next_of_kin_location = models.CharField(max_length=255, blank=True, null=False, default=None)
 
     # emergency contact
-    emergency_name = models.CharField(max_length=255, blank=False, null=False)
-    emergency_primary_phone = models.CharField(max_length=255, blank=False, null=False)
+    emergency_name = models.CharField(max_length=255, blank=False, null=False, default=None)
+    emergency_primary_phone = models.CharField(max_length=255, blank=False, null=False, default=None)
 
     # organisation
-    organisations = models.ManyToManyField(Group, blank=True)
+    organisations = models.ManyToManyField(Group, blank=True, related_name='groups')
     profile_photo = models.ImageField(default='default_profile_photo.jpg', blank=True, null=True,
                                       upload_to='profile_photos')
     created_on = models.DateTimeField(auto_now_add=True)
@@ -124,9 +131,10 @@ class Member(models.Model):
         else:
             return "/media/default_profile_photo.jpg"
 
-    def save(self):
+    def save(self, *args, **kwargs):
         try:
             super().save()
+
             profile_photo = Image.open(self.profile_photo.path)  # Open image
             # resize image
             if profile_photo.height > 150 or profile_photo.width > 150:
@@ -135,6 +143,10 @@ class Member(models.Model):
                 profile_photo.save(self.profile_photo.path)  # Save it again and override the larger image
         except:
             pass
+
+    def save(self, *args, **kwargs):
+        self.muid = f"{self.last_name[-2:].upper()}{self.first_name[-2:].upper()}{str(self.date_of_birth)[:4]}{self.id}"
+        super().save()
 
     @property
     def fullname(self):
@@ -151,25 +163,31 @@ class Member(models.Model):
 
 
 class MemberReligiousCV(models.Model):
-    member = models.OneToOneField(Member, on_delete=models.CASCADE)
+    member = models.OneToOneField(Member, on_delete=models.CASCADE, related_name="member_ccv")
 
     #    baptism_cv
-    baptism_status = models.BooleanField(default=True, blank=True, null=False, choices=GENERIC_BOOLEAN)
+    baptism_status = models.BooleanField(default=False, blank=True, null=True, choices=GENERIC_BOOLEAN)
     baptism_date = models.DateField(null=True, blank=True)
     baptism_location = models.CharField(max_length=255, blank=True, null=True)
     baptised_by = models.CharField(max_length=255, blank=True, null=True)
 
     #    holy_communion_cv
-    holy_communion_status = models.BooleanField(default=True, blank=True, null=False, choices=GENERIC_BOOLEAN)
+    holy_communion_status = models.BooleanField(default=False, blank=True, null=True, choices=GENERIC_BOOLEAN)
     holy_communion_date = models.DateField(null=True, blank=True)
     holy_communion_location = models.CharField(max_length=255, blank=True, null=True)
     holy_communion_given_by = models.CharField(max_length=255, blank=True, null=True)
 
     #    confirmation_cv
-    confirmation_status = models.BooleanField(default=True, blank=True, null=False, choices=GENERIC_BOOLEAN)
+    confirmation_status = models.BooleanField(default=False, blank=True, null=True, choices=GENERIC_BOOLEAN)
     confirmation_date = models.DateField(null=True, blank=True)
     confirmation_location = models.CharField(max_length=255, blank=True, null=True)
     confirmed_by = models.CharField(max_length=255, blank=True, null=True)
+
+    #    holy_matrimony_cv
+    holy_matrimony_status = models.BooleanField(default=False, blank=True, null=True, choices=GENERIC_BOOLEAN)
+    holy_matrimony_date = models.DateField(null=True, blank=True)
+    holy_matrimony_location = models.CharField(max_length=255, blank=True, null=True)
+    holy_matrimony_presided_by = models.CharField(max_length=255, blank=True, null=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

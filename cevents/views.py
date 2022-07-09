@@ -14,7 +14,6 @@ def events(request):
         'table_name': 'Events Data',
         'dbtn': 'events-download'
     }
-    print(cevents)
     return render(request, 'cevents/events.html', context)
 
 

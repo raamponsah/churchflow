@@ -1,8 +1,8 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block content %}
- <div class="row app-card shadow-sm p-4" hx-target="#app-body" hx-swap="outerHTML">
-         <form method="post" enctype="multipart/form-data">
+ <div class="row app-card shadow-sm p-4">
+         <form method="post" enctype="multipart/form-data" action="{% url 'edit-project-item-contribution' project.id pmc.id %}">
                       <h5>Edit Contribution</h5>
                       {%csrf_token%}
                       {% for field in form.hidden_fields %}
@@ -14,7 +14,7 @@
                    </div>
               <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                 <div class="col-auto">
-                    <button type="submit" hx-push-url="true" hx-post="{% url 'edit-project-item-contribution' project.id pmc.id %}" class="btn app-btn-primary mt-3">Update Project Contribution</button>
+                    <button type="submit" class="btn app-btn-primary mt-3">Update Project Contribution</button>
                 </div>
             </div>
          </form>
