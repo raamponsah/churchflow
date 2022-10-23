@@ -102,11 +102,11 @@ X_FRAME_OPTIONS = '*'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'datasquare',
+        'NAME': 'churchflow',
         'USER': 'postgres',
-        'PASSWORD': '',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
-        'PORT': '5436',
+        'PORT': '5433',
     }
 }
 
